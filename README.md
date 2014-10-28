@@ -22,16 +22,16 @@ Operating Systems that are compatible with this script:
 	- Mac OS X  
 	- Windows (Some features are disabled)
 
-Future Updates (Updates are listed in order of importance):
-	- Updated graphic
-	- Make faster on Windows
-	- More support for Windows
-	- Support for Linux
-	- Process list
-	- Code cleanup
+Future Updates (Updates are listed in order of importance):  
+	- Updated graphic  
+	- Make faster on Windows  
+	- More support for Windows  
+	- Support for Linux  
+	- Process list  
+	- Code cleanup  
 
-Things to keep in mind:
-	- Windows has very limited support right now
+Things to keep in mind:  
+	- Windows has very limited support right now  
 
 BUGS:  
-	- None!
+	- None!  
