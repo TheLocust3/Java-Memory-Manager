@@ -1,3 +1,19 @@
+/*
+ * NOTE: This is added by intellij IDE. Disregard this message if there is another copyright later in the file.
+ * Copyright (C) 2014  Will (n9Mtq4) Bresnahan
+ * A library to send notifications to the notification center in OSX
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.gmail.jake.kinsella;
 
 import java.io.*;
@@ -12,6 +28,14 @@ public class Notification {
 	private String subtitle;
 	private String soundName;
 	
+	/**
+	 * Initializes a new Notification with a title
+	 * and text content.
+	 * These can be overridden later with {@link com.gmail.jake.kinsella.Notification#setTitle(String)}
+	 * and {@link com.gmail.jake.kinsella.Notification#setText(String)}
+	 * @param title The title the notification will have.
+	 * @param text The text content the notification will have.
+	 * */
 	public Notification(String title, String text) {
 		
 		this.title = title;
@@ -19,11 +43,19 @@ public class Notification {
 		
 	}
 	
+	/**
+	 * Initializes a new Notification.
+	 * */
 	public Notification() {
 //		dummy
 	}
 	
+	/**
+	 * Displays the notification with the current values.
+	 * */
 	public boolean display() {
+		
+		if (!(System.getProperty("os.name").toLowerCase().contains("mac"))) return false;
 		
 		if (sc(text) && sc(title)) {
 			
@@ -63,12 +95,12 @@ public class Notification {
 		return true;
 	}
 
-	public String sendShellCommand(String command) {
+	private String sendShellCommand(String command) {
 		String output = "";
-		saveFile("./t.command", command);
-		run("chmod +x ./t.command");
-		run("./t.command");
-		deleteFile("./t.command");
+		saveFile("./.t.command", command);
+		run("chmod +x ./.t.command");
+		run("./.t.command");
+		deleteFile("./.t.command");
 		return output;
 	}
 	
@@ -90,7 +122,7 @@ public class Notification {
 		}
 	}
 	
-	private void run(String command) {
+	private String run(String command) {
 		Runtime cmd_Runtime = Runtime.getRuntime();
 		try {
 			Process cmdReturn_Process = cmd_Runtime.exec(command);
@@ -98,45 +130,88 @@ public class Notification {
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String line;
+			String out = "";
 			while ((line = bufferedReader.readLine()) != null) {
+				out += line + "\n";
 			}
+			return out;
 		} catch (IOException e1) {
+			return "error";
 		}
 	}
 	
 	private boolean sc(String text) {
-		if (text == null) return false;
-		return !(text.trim().equalsIgnoreCase(""));
+		return text != null && !(text.trim().equalsIgnoreCase(""));
 	}
 	
+	/**
+	 * Gets the notification's currently set title.
+	 * @return The notification's title
+	 * @see Notification#setTitle(String)
+	 * */
 	public String getTitle() {
 		return title;
 	}
 	
+	/**
+	 * Sets the notification's title.
+	 * @param title The title to set the notification to
+	 * @see Notification#getTitle() 
+	 * */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
+	/**
+	 * Gets the notification's currently set text.
+	 * @return The notification's text
+	 * @see Notification#setText(String)
+	 * */
 	public String getText() {
 		return text;
 	}
 	
+	/**
+	 * Sets the notification's text content.
+	 * @param text The text to set the notification to
+	 * @see com.gmail.jake.kinsella.Notification#getText() 
+	 * */
 	public void setText(String text) {
 		this.text = text;
 	}
 	
+	/**
+	 * Gets the notification's currently set subtitle.
+	 * @return The notification's subtitle
+	 * @see Notification#setSubtitle(String) 
+	 * */
 	public String getSubtitle() {
 		return subtitle;
 	}
 	
+	/**
+	 * Sets the notification's subtitle.
+	 * @param subtitle The subtitle to set the notification to
+	 * @see com.gmail.jake.kinsella.Notification#getSubtitle()
+	 * */
 	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
 	}
 	
+	/**
+	 * Gets the notification's currently set sound's name.
+	 * @return The name of the sound that will play when the notification displays
+	 * @see Notification#setSoundName(String) 
+	 * */
 	public String getSoundName() {
 		return soundName;
 	}
 	
+	/**
+	 * Sets the notification's sound.
+	 * @param soundName The sound's name that will play when the notification displays
+	 * @see com.gmail.jake.kinsella.Notification#getSoundName()
+	 * */
 	public void setSoundName(String soundName) {
 		this.soundName = soundName;
 	}
