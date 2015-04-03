@@ -1,7 +1,5 @@
 package com.gmail.jake.kinsella;
 
-import com.sun.xml.internal.ws.resources.DispatchMessages;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
