@@ -42,7 +42,6 @@ public class Main implements ActionListener {
 
         jfrm = new JFrame("Memory Manager");
         jfrm.setSize(270, 250);
-        jfrm.setResizable(false);
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.setLayout(new FlowLayout());
 

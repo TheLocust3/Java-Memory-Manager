@@ -89,8 +89,8 @@ public class MemoryGraphic {
     private void drawRect (Graphics2D g, int startX, int startY, int endX, int height, Color color, int position) {
         if (position == 0) {
             g.setColor(color);
-            g.fillRoundRect(startX, startY, endX - 10, height, 10, 10);
-            g.fillRect(startX + 10, startY, endX, height);
+            g.fillRoundRect(startX + 1, startY, endX - 10, height, 10, 10);
+            g.fillRect(startX + 2, startY, endX, height);
         } else if (position == 1) {
             g.setColor(color);
             g.fillRect(startX, startY, endX, height);
