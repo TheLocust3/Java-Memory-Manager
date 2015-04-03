@@ -33,7 +33,7 @@ public class Main implements ActionListener {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-
+    	
         JButton purgeButton;
         JFrame jfrm;
         JPanel settingsPanel, memoryPanel, quickButtonsPanel, options1, options2, options3;
