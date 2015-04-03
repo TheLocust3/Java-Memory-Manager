@@ -110,7 +110,7 @@ public class Main implements ActionListener {
                         canvas.repaint(canvas.getWidth() / 2, (int) (canvas.getHeight() / 2.25), canvas.getWidth(), canvas.getHeight()); // Repaint memory graphic
                     }
 
-                    //Notifaction check and execution
+                    // Notifaction check and execution
                     if (alertLowCheck.isSelected()) {
                         if (canvas.memoryGraphic.memoryStats.getUnusedMemory() < ramOnAlert) {
                             if (!sentNotifaction) {
@@ -124,7 +124,7 @@ public class Main implements ActionListener {
                         }
                     }
 
-                    //Purge check and execution
+                    // Purge check and execution
                     if (purgeLowCheck.isSelected()) {
                         if (canvas.memoryGraphic.memoryStats.getUnusedMemory() < ramOnPurge) {
                             if (!purgedOnLow) {
@@ -136,10 +136,8 @@ public class Main implements ActionListener {
                     }
 
                     //Check values of settings checkboxes just in case the user didn't press enter to submit
-                    ramOnAlert = parse(alertLowInput.getText(), 512);
-                    alertLowInput.setText(Integer.toString(ramOnAlert));
-                    ramOnPurge = parse(purgeLowInput.getText(), 512);
-                    purgeLowInput.setText(Integer.toString(ramOnPurge));
+                    ramOnAlert = parse(alertLowInput.getText(), 512, alertLowInput);
+                    ramOnAlert = parse(alertLowInput.getText(), 512, purgeLowInput);
                 }
             }
         };
@@ -200,6 +198,15 @@ public class Main implements ActionListener {
         try {
            return Integer.parseInt(toParse);
         } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+    
+    private int parse (String toParse, int defaultValue, JTextField field) {
+        try {
+           return Integer.parseInt(toParse);
+        } catch (NumberFormatException e) {
+        	field.setText(Integer.toString(defaultValue));
             return defaultValue;
         }
     }
