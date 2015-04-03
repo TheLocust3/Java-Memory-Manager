@@ -32,14 +32,14 @@ public class MemoryGraphic {
         //Windows does not have wired memory
         if (!memoryStats.isWindows()) {
             //Draw wired memory graphic
-            drawRect(g, 5, 2, 246, 50, Color.RED, 2);
+            drawRect(g, 5, 2, 244, 50, Color.RED, 2);
         }
 
         int unusedRamX = getSize(246, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
 
         if (!memoryStats.isWindows()) {
             //Draw used memory graphic
-            drawRect(g, unusedRamX, 2, getSize(246, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()), 50, Color.YELLOW, 1);
+            drawRect(g, 2, 2, getSize(246, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()), 50, Color.YELLOW, 0);
         } else {
             //Instead of wired memory on the bottom there is used memory
             g.setColor(Color.YELLOW);
