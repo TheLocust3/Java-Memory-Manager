@@ -32,7 +32,7 @@ public class MemoryGraphic {
         //Windows does not have wired memory
         if (!memoryStats.isWindows()) {
             //Draw wired memory graphic
-            drawRect(g, 2, 2, 246, 50, Color.RED, 2);
+            drawRect(g, 5, 2, 246, 50, Color.RED, 2);
         }
 
         int unusedRamX = getSize(246, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
@@ -43,11 +43,11 @@ public class MemoryGraphic {
         } else {
             //Instead of wired memory on the bottom there is used memory
             g.setColor(Color.YELLOW);
-            g.fillRoundRect(2, 2, 246, 50, 10, 10);
+            g.fillRoundRect(4, 2, 246, 50, 10, 10);
         }
 
         //Draw unused memory graphic
-        drawRect(g, 2, 2, unusedRamX, 50, Color.GREEN, 0);
+        drawRect(g, 3, 2, unusedRamX, 50, Color.GREEN, 0);
 
         //Draw black outline of graphic
         g.setColor(Color.BLACK);
@@ -89,8 +89,8 @@ public class MemoryGraphic {
     private void drawRect (Graphics2D g, int startX, int startY, int endX, int height, Color color, int position) {
         if (position == 0) {
             g.setColor(color);
-            g.fillRoundRect(startX + 1, startY, endX - 10, height, 10, 10);
-            g.fillRect(startX + 2, startY, endX, height);
+            g.fillRoundRect(startX, startY, endX - 10, height, 10, 10);
+            g.fillRect(startX + 1, startY, endX, height);
         } else if (position == 1) {
             g.setColor(color);
             g.fillRect(startX, startY, endX, height);
