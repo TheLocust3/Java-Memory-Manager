@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class Constructions {
     String os = System.getProperty("os.name").toLowerCase();
 
-    //Creates a one line option for the settings tab with a text field
+    // Creates a one line option for the settings tab with a text field
     public JPanel createOption (JCheckBox checkBox, JTextField textField, boolean windowsComp) {
         JPanel tmp = new JPanel();
 
@@ -24,7 +24,7 @@ public class Constructions {
         return tmp;
     }
 
-    //Creates a one line option for the settings tab with a combo box
+    // Creates a one line option for the settings tab with a combo box
     public JPanel createOption (JCheckBox checkBox, JComboBox comboBox ,boolean windowsComp) {
         JPanel tmp = new JPanel();
 
@@ -36,7 +36,7 @@ public class Constructions {
         return tmp;
     }
 
-    //Creates a one line option for the settings tab with ONLY a checkbox
+    // Creates a one line option for the settings tab with ONLY a checkbox
     public JPanel createOption (JCheckBox checkBox, boolean windowsComp) {
         JPanel tmp = new JPanel();
 

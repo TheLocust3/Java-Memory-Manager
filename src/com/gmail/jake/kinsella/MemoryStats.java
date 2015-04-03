@@ -16,7 +16,7 @@ public class MemoryStats {
 
     public void updateStats () {
         if (isWindows()) {
-            //Run Windows specific commands
+            // Run Windows specific commands
             String sMaxMem = cmd.run("systeminfo", "Physical Memory");
             sMaxMem = sMaxMem.replace(" ", "");
             sMaxMem = sMaxMem.substring(sMaxMem.indexOf(":") + 1, sMaxMem.indexOf("MB")).replace(",", "");
@@ -32,7 +32,7 @@ public class MemoryStats {
             System.out.println(memory);
 
         } else {
-            //Run Mac specific commands
+            // Run Mac specific commands
             memory = cmd.run("top -l 1", "PhysMem");
 
             usedMem = Integer.parseInt(memory.substring(memory.indexOf(" ") + 1, memory.indexOf("M used")));
@@ -46,7 +46,7 @@ public class MemoryStats {
         }
     }
 
-    //Check if operating system is Windows
+    // Check if operating system is Windows
     public boolean isWindows () {
         return (os.indexOf("win") >= 0);
     }

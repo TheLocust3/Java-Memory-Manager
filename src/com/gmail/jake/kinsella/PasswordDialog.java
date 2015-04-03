@@ -35,7 +35,7 @@ public class PasswordDialog extends JDialog {
                     int exitCode = memoryActions.purge(passwordField.getPassword());
                     if (exitCode == 0) {
                         passwordText.setText("Correct: ");
-                        jfrm.dispatchEvent(new WindowEvent(jfrm, WindowEvent.WINDOW_CLOSING)); //Close password window
+                        jfrm.dispatchEvent(new WindowEvent(jfrm, WindowEvent.WINDOW_CLOSING)); // Close password window
                     } else {
                         passwordText.setText("Incorrect: ");
                     }
@@ -46,7 +46,7 @@ public class PasswordDialog extends JDialog {
                 exitCode = memoryActions.checkPassword(passwordField.getPassword());
                 if (exitCode == 0) {
                     passwordText.setText("Correct: ");
-                    jfrm.dispatchEvent(new WindowEvent(jfrm, WindowEvent.WINDOW_CLOSING)); //Close password window
+                    jfrm.dispatchEvent(new WindowEvent(jfrm, WindowEvent.WINDOW_CLOSING)); // Close password window
                 } else {
                     passwordText.setText("Incorrect: ");
                 }
@@ -61,7 +61,7 @@ public class PasswordDialog extends JDialog {
         jfrm.pack();
         jfrm.setResizable(false);
 
-        //Check if you should actually run purge
+        // Check if you should actually run purge
         if (runPurge) {
             if (MemoryActions.exitCode != 0) {
                 System.out.println("True");

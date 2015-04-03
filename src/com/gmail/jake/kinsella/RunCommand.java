@@ -6,7 +6,7 @@ public class RunCommand {
 
     public String sendShellCommand(String command) {
         String output = "";
-        saveFile("./t.command", command + "; echo Exit $?;"); //echo Exit $?; gets the exit code of the command
+        saveFile("./t.command", command + "; echo Exit $?;"); // echo Exit $?; gets the exit code of the command
         run("chmod +x ./t.command", "");
         output = run("./t.command", "");
         deleteFile("./t.command");
@@ -14,13 +14,13 @@ public class RunCommand {
         return output;
     }
 
-    //Removes created shell script
+    // Removes created shell script
     private boolean deleteFile(String path) {
         File f = new File(path);
         return f.delete();
     }
 
-    //Created shell script
+    // Created shell script
     private void saveFile(String path, String text) {
         String[] tokens_String = text.split("\n");
         PrintStream ps;
@@ -34,7 +34,7 @@ public class RunCommand {
         }
     }
 
-    //Runs a command and takes an argument to search the results
+    // Runs a command and takes an argument to search the results
     public String run (String cmd, String grep) {
         String s;
         String full = "";
@@ -65,7 +65,7 @@ public class RunCommand {
         return "";
     }
 
-    //Searches output for String grep
+    // Searches output for String grep
     private String runGrep (String output, String grep) {
         String tmp = output;
 

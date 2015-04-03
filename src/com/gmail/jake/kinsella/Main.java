@@ -1,7 +1,6 @@
 package com.gmail.jake.kinsella;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +21,7 @@ public class Main implements ActionListener {
     int ramOnAlert = 512, ramOnPurge = 256;
 
     Main () {
-        //Set nice looking Nimbus theme
+        // Set nice looking Nimbus theme
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -31,7 +30,7 @@ public class Main implements ActionListener {
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+            //  If Nimbus is not available, you can set the GUI to another look and feel.
         }
     	
         JButton purgeButton;
@@ -45,10 +44,10 @@ public class Main implements ActionListener {
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.setLayout(new FlowLayout());
 
-        //Init canvas, so it gets the Nimbus them
+        // Init canvas, so it gets the Nimbus them
         canvas = new Canvas();
 
-        //Create purge button
+        // Create purge button
         purgeButton = new JButton("Purge");
         purgeButton.setActionCommand("Purge");
         purgeButton.addActionListener(this);
@@ -56,34 +55,34 @@ public class Main implements ActionListener {
         quickButtonsPanel = new JPanel();
         quickButtonsPanel.add(purgeButton);
 
-        //Create Memory tab
+        // Create Memory tab
         Component[] tmp = {canvas, quickButtonsPanel};
         memoryPanel = constructions.createTab(tmp, 2, 1);
-        tmp = null; //Make sure it gets de-allocated quick
+        tmp = null; // Make sure it gets de-allocated quick
 
-        //Create line one of options
+        // Create line one of options
         alertLowCheck = constructions.createOptionsCheckBox(this, "AlertLowCheck", "Alert when unused ram is <", true);
         alertLowInput = constructions.createOptionsTextField(this, "AlertLowInput", "512", 3, true);
 
-        //Create line two of options
+        // Create line two of options
         purgeLowCheck = constructions.createOptionsCheckBox(this, "PurgeLowCheck", "Purge when unused ram is <", false);
         purgeLowInput = constructions.createOptionsTextField(this, "PurgeLowInput", "256", 3, false);
 
-        //Create line three of options
+        // Create line three of options
         antiAliasingCheck = constructions.createOptionsCheckBox(this, "AntiAliasingCheck", "Anti-aliasing", true);
         String[] tmpOptions = {"Bicubic", "Bilinear", "Nearest Neighbor"};
         antiAliasingCombo = constructions.createOptionsComboBox(this, "AntiAliasingCombo", tmpOptions, 2, true);
 
-        //Create containers for options
+        // Create containers for options
         options1 = constructions.createOption(alertLowCheck, alertLowInput, false);
         options2 = constructions.createOption(purgeLowCheck, purgeLowInput, false);
         options3 = constructions.createOption(antiAliasingCheck, antiAliasingCombo, true);
 
-        //Create Settings tab
+        // Create Settings tab
         Component[] tmp2 = {options3, options1, options2};
         settingsPanel = constructions.createTab(tmp2, 5, 1);
 
-        //Setup tabbedPane
+        // Setup tabbedPane
         tabbedPane = new JTabbedPane();
 
         tabbedPane.addTab("Memory", memoryPanel);
@@ -97,7 +96,7 @@ public class Main implements ActionListener {
     }
 
     private void startThreads() {
-        //Thread that controls the memory and the settings tabs
+        // Thread that controls the memory and the settings tabs
         SwingWorker<Void, Void> memoryAndSettingsThread = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
@@ -105,11 +104,11 @@ public class Main implements ActionListener {
                     Thread.sleep(3000);
                     if (tabbedPane.getSelectedIndex() == 0) {
                         canvas.updateStats();
-                        canvas.repaint(0, 0, canvas.getWidth(), (int) (canvas.getHeight() / 2.25)); // Repaint memory graphic
-                        canvas.repaint(canvas.getWidth() / 2, (int) (canvas.getHeight() / 2.25), canvas.getWidth(), canvas.getHeight()); // Repaint memory graphic
+                        canvas.repaint(0, 0, canvas.getWidth(), (int) (canvas.getHeight() / 2.25)); //  Repaint memory graphic
+                        canvas.repaint(canvas.getWidth() / 2, (int) (canvas.getHeight() / 2.25), canvas.getWidth(), canvas.getHeight()); //  Repaint memory graphic
                     }
 
-                    // Notifaction check and execution
+                    //  Notifaction check and execution
                     if (alertLowCheck.isSelected()) {
                         if (canvas.memoryGraphic.memoryStats.getUnusedMemory() < ramOnAlert) {
                             if (!sentNotifaction) {
@@ -123,7 +122,7 @@ public class Main implements ActionListener {
                         }
                     }
 
-                    // Purge check and execution
+                    //  Purge check and execution
                     if (purgeLowCheck.isSelected()) {
                         if (canvas.memoryGraphic.memoryStats.getUnusedMemory() < ramOnPurge) {
                             if (!purgedOnLow) {
@@ -134,7 +133,7 @@ public class Main implements ActionListener {
                         purgedOnLow = false;
                     }
 
-                    //Check values of settings checkboxes just in case the user didn't press enter to submit
+                    // Check values of settings checkboxes just in case the user didn't press enter to submit
                     ramOnAlert = parse(alertLowInput.getText(), 512, alertLowInput);
                     ramOnAlert = parse(alertLowInput.getText(), 512, purgeLowInput);
                 }
