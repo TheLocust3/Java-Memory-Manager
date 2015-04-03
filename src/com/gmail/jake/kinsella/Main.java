@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.n9mtq4.demo.notifcationmac.Notification;
 
 /**
  * Created by jakekinsella on 10/1/14.

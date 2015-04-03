@@ -1,0 +1,3 @@
+[submodule "MacOSX-Notification-Library-Java"]
+	path = MacOSX-Notification-Library-Java
+	url = https://github.com/n9Mtq4/MacOSX-Notification-Library-Java.git
