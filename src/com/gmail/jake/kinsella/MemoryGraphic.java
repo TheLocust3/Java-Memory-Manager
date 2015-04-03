@@ -47,7 +47,7 @@ public class MemoryGraphic {
         }
 
         //Draw unused memory graphic
-        drawRect(g, 3, 2, unusedRamX, 50, Color.GREEN, 0);
+        drawRect(g, 2, 2, unusedRamX, 50, Color.GREEN, 0);
 
         //Draw black outline of graphic
         g.setColor(Color.BLACK);
