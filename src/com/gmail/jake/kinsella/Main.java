@@ -42,6 +42,7 @@ public class Main implements ActionListener {
 
         jfrm = new JFrame("Memory Manager");
         jfrm.setSize(270, 250);
+        jfrm.setResizable(false);
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfrm.setLayout(new FlowLayout());
 
@@ -90,10 +91,10 @@ public class Main implements ActionListener {
         tabbedPane.addTab("Settings", settingsPanel);
 
         jfrm.getContentPane().add(tabbedPane);
+        
         jfrm.setVisible(true);
 
         startThreads();
-
     }
 
     private void startThreads() {
@@ -105,7 +106,8 @@ public class Main implements ActionListener {
                     Thread.sleep(3000);
                     if (tabbedPane.getSelectedIndex() == 0) {
                         canvas.updateStats();
-                        canvas.update(canvas.getGraphics());
+                        canvas.repaint(0, 0, canvas.getWidth(), (int) (canvas.getHeight() / 2.25)); // Repaint memory graphic
+                        canvas.repaint(canvas.getWidth() / 2, (int) (canvas.getHeight() / 2.25), canvas.getWidth(), canvas.getHeight()); // Repaint memory graphic
                     }
 
                     //Notifaction check and execution

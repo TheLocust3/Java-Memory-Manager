@@ -8,6 +8,8 @@ import java.awt.*;
  */
 public class Canvas extends JPanel {
     MemoryGraphic memoryGraphic = new MemoryGraphic();
+    
+    private boolean inited = false, repaintExtras = false;
 
     public Canvas() {
         //Set nice looking Nimbus theme
@@ -23,13 +25,13 @@ public class Canvas extends JPanel {
         }
     }
 
-    public Dimension getPreferredSize() {
+    public Dimension getPreferredSize () {
         return new Dimension(250, 135);
     }
-
-    public void paintComponent(Graphics g) {
+    
+    public void paintComponent (Graphics g) {
         super.paintComponent(g);
-
+        
         memoryGraphic.drawGraphic(g);
     }
 
