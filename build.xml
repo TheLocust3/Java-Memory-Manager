@@ -6,7 +6,9 @@
              classpath="lib/appbundler-1.0.jar" />
 
     <target name="bundle-memoryManager">
-        <bundleapp outputdirectory="dist"
+ 	<mkdir dir="dist/" />
+        
+	<bundleapp outputdirectory="dist"
             name="MemoryManager"
             displayname="Memory Manager"
             identifier="com.gmail.jake.kinsella"
