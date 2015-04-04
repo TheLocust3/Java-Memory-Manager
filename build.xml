@@ -6,26 +6,26 @@
              classpath="lib/appbundler-1.0.jar" />
 
     <target name="clean">
-        <delete dir="build"/>
+        <delete dir="build" />
     </target>
 
     <target name="compile">
-        <mkdir dir="build/classes"/>
-        <javac srcdir="MacOSX-Notification-Library-Java/src" destdir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>
+        <mkdir dir="build/classes" />
+        <javac srcdir="MacOSX-Notification-Library-Java/src" destdir="build/classes" />
+        <javac srcdir="src" destdir="build/classes" />
     </target>
 
-    <target name="jar">
-        <mkdir dir="build/jar"/>
+    <target name="build-jar">
+        <mkdir dir="build/jar" />
         <jar destfile="build/jar/Memory-Manager-Universal.jar" basedir="build/classes">
             <manifest>
-                <attribute name="Main-Class" value="com.gmail.jake.kinsella.Main"/>
+                <attribute name="Main-Class" value="com.gmail.jake.kinsella.Main" />
             </manifest>
         </jar>
     </target>
 
     <target name="run">
-        <java jar="build/jar/Memory-Manager-Universal.jar" fork="true"/>
+        <java jar="build/jar/Memory-Manager-Universal.jar" fork="true" />
     </target>
 
     <target name="build-app">
