@@ -192,13 +192,13 @@ public class Main implements ActionListener {
         } else if (actionEvent.getActionCommand().equals("Purge")) {
             PasswordDialog passwordDialog = new PasswordDialog(true);
         } else if (actionEvent.getActionCommand().equals("SaveButton")) {
-            ramOnPurge = parse(purgeLowInput.getText(), 256);
-            ramOnAlert = parse(alertLowInput.getText(), 512);
-            timeout = parse(timeInput.getText(), 3) * 1000;
+            ramOnPurge = parseInt(purgeLowInput.getText(), 256);
+            ramOnAlert = parseInt(alertLowInput.getText(), 512);
+            timeout = (int) parseDouble(timeInput.getText(), 3) * 1000;
         }
     }
 
-    private int parse (String toParse, int defaultValue) {
+    private int parseInt (String toParse, int defaultValue) {
         try {
            return Integer.parseInt(toParse);
         } catch (NumberFormatException e) {
@@ -206,11 +206,10 @@ public class Main implements ActionListener {
         }
     }
     
-    private int parse (String toParse, int defaultValue, JTextField field) {
+    private double parseDouble (String toParse, double defaultValue) {
         try {
-           return Integer.parseInt(toParse);
+           return Double.parseDouble(toParse);
         } catch (NumberFormatException e) {
-        	field.setText(Integer.toString(defaultValue));
             return defaultValue;
         }
     }
