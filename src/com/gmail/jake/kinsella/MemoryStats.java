@@ -30,7 +30,6 @@ public class MemoryStats {
             usedMem = maxMem - unusedMem;
 
             System.out.println(memory);
-
         } else {
             // Run Mac specific commands
             memory = cmd.run("top -l 1", "PhysMem");
@@ -39,9 +38,9 @@ public class MemoryStats {
 
             wiredMem = Integer.parseInt(memory.substring(memory.indexOf("(") + 1, memory.indexOf("M wired)")));
 
-            memory = cmd.run("/usr/sbin/system_profiler SPHardwareDataType", "Memory");
-            maxMem = Integer.parseInt(memory.substring(memory.indexOf("Mem") + 8, memory.indexOf(" GB"))) * 1000;
-
+            memory = cmd.run("sysctl hw.memsize", " ");
+            maxMem = (int) ((Long.parseLong(memory.substring(12, memory.length())) / 1073741824) * 1000);
+            
             unusedMem = maxMem - usedMem;
         }
     }
