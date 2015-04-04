@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ButtonDemo" default="default" basedir=".">        
+
+    <taskdef name="bundleapp"
+             classname="com.oracle.appbundler.AppBundlerTask"   
+             classpath="lib/appbundler-1.0.jar" />
+
+    <target name="bundle-buttonDemo">
+        <bundleapp outputdirectory="dist"
+            name="MemoryManager"
+            displayname="Memory Manager"
+            identifier="com.gmail.jake.kinsella"
+            mainclassname="com.gmail.jake.kinsella.Main">
+            <classpath file="/Users/jakekinsella/Desktop/MemoryManager.jar" />
+        </bundleapp>
+    </target>
+
+</project>
