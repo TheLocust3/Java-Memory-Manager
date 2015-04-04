@@ -31,22 +31,22 @@ public class MemoryGraphic {
         // Windows does not have wired memory
         if (!memoryStats.isWindows()) {
             // Draw wired memory graphic
-            drawRect(g, 5, 2, 244, 50, Color.RED, true);
+            drawRect(g, 3, 2, 246, 50, Color.RED, true);
         }
 
         int unusedRamX = getSize(246, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
 
         if (!memoryStats.isWindows()) {
             // Draw used memory graphic
-            drawRect(g, 2, 2, getSize(246, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()), 50, Color.YELLOW, false);
+            drawRect(g, 3, 2, getSize(246, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, Color.YELLOW, false);
         } else {
             // Instead of wired memory on the bottom there is used memory
             g.setColor(Color.YELLOW);
-            g.fillRoundRect(4, 2, 246, 50, 10, 10);
+            g.fillRoundRect(3, 2, 246, 50, 10, 10);
         }
 
         // Draw unused memory graphic
-        drawRect(g, 2, 2, unusedRamX, 50, Color.GREEN, false);
+        drawRect(g, 3, 2, unusedRamX, 50, Color.GREEN, false);
 
         // Draw black outline of graphic
         g.setColor(Color.BLACK);
@@ -99,12 +99,12 @@ public class MemoryGraphic {
             g.fillRoundRect(startX, startY, endX, height, 10, 10);
         } else {
         	g.setColor(color);
-            g.fillRoundRect(startX, startY, endX - 10, height, 10, 10);
+            g.fillRoundRect(startX, startY, endX, height, 10, 10);
             g.fillRect(startX + 1, startY, endX, height);
         }
     }
 
     private int getSize (int width, int maxMem, int stat) {
-        return (int) (((float) stat * width) / maxMem);
+        return (int) ((float) ((stat * width) / maxMem));
     }
 }

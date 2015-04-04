@@ -49,8 +49,6 @@ public class RunCommand {
                 }
 
                 if (s.contains("Exit")) {
-                    System.out.println("Here");
-                    System.out.println(s);
                     full = s.substring(5);
                 }
 

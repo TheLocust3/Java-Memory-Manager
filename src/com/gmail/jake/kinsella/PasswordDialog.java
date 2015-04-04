@@ -64,10 +64,8 @@ public class PasswordDialog extends JDialog {
         // Check if you should actually run purge
         if (runPurge) {
             if (MemoryActions.exitCode != 0) {
-                System.out.println("True");
                 jfrm.setVisible(true);
             } else {
-                System.out.println("False");
                 memoryActions.purgeNoPass();
             }
         }
