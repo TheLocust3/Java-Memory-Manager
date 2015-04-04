@@ -5,13 +5,13 @@
              classname="com.oracle.appbundler.AppBundlerTask"   
              classpath="lib/appbundler-1.0.jar" />
 
-    <target name="bundle-buttonDemo">
+    <target name="bundle-memoryManager">
         <bundleapp outputdirectory="dist"
             name="MemoryManager"
             displayname="Memory Manager"
             identifier="com.gmail.jake.kinsella"
             mainclassname="com.gmail.jake.kinsella.Main">
-            <classpath file="/Users/jakekinsella/Desktop/MemoryManager.jar" />
+            <classpath file="*.jar" />
         </bundleapp>
     </target>
 
