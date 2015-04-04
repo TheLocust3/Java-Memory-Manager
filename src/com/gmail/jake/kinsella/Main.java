@@ -34,7 +34,7 @@ public class Main implements ActionListener {
             //  If Nimbus is not available, you can set the GUI to another look and feel.
         }
     	
-        JButton purgeButton;
+        JButton purgeButton, saveButton;
         JFrame jfrm;
         JPanel settingsPanel, memoryPanel, quickButtonsPanel, options1, options2, options3;
 
@@ -74,14 +74,19 @@ public class Main implements ActionListener {
         String[] tmpOptions = {"Bicubic", "Bilinear", "Nearest Neighbor"};
         antiAliasingCombo = constructions.createOptionsComboBox(this, "AntiAliasingCombo", tmpOptions, 2, true);
 
+        // Create save button
+        saveButton = new JButton("Save Options");
+        saveButton.setActionCommand("SaveButton");
+        saveButton.addActionListener(this);
+        
         // Create containers for options
         options1 = constructions.createOption(alertLowCheck, alertLowInput, false);
         options2 = constructions.createOption(purgeLowCheck, purgeLowInput, false);
         options3 = constructions.createOption(antiAliasingCheck, antiAliasingCombo, true);
 
         // Create Settings tab
-        Component[] tmp2 = {options3, options1, options2};
-        settingsPanel = constructions.createTab(tmp2, 5, 1);
+        Component[] tmp2 = {options3, options1, options2, saveButton};
+        settingsPanel = constructions.createTab(tmp2, 6, 1);
 
         // Setup tabbedPane
         tabbedPane = new JTabbedPane();
@@ -133,10 +138,6 @@ public class Main implements ActionListener {
                     } else {
                         purgedOnLow = false;
                     }
-
-                    // Check values of settings checkboxes just in case the user didn't press enter to submit
-                    ramOnAlert = parse(alertLowInput.getText(), 512, alertLowInput);
-                    ramOnAlert = parse(alertLowInput.getText(), 512, purgeLowInput);
                 }
             }
         };
@@ -190,6 +191,9 @@ public class Main implements ActionListener {
             }
         } else if (actionEvent.getActionCommand().equals("Purge")) {
             PasswordDialog passwordDialog = new PasswordDialog(true);
+        } else if (actionEvent.getActionCommand().equals("SaveButton")) {
+            ramOnPurge = parse(purgeLowInput.getText(), 256);
+            ramOnAlert = parse(alertLowInput.getText(), 512);
         }
     }
 
