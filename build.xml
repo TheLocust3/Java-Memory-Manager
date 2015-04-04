@@ -5,15 +5,38 @@
              classname="com.oracle.appbundler.AppBundlerTask"   
              classpath="lib/appbundler-1.0.jar" />
 
-    <target name="bundle-memoryManager">
- 	<mkdir dir="dist/" />
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="MacOSX-Notification-Library-Java/src" destdir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Memory-Manager-Universal.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="com.gmail.jake.kinsella.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/HelloWorld.jar" fork="true"/>
+    </target>
+
+    <target name="build-app">
+ 	  <mkdir dir="build/app" />
         
-	<bundleapp outputdirectory="dist"
-            name="MemoryManager"
+	   <bundleapp outputdirectory="build/app"
+            name="Memory-Manager-Mac"
             displayname="Memory Manager"
             identifier="com.gmail.jake.kinsella"
             mainclassname="com.gmail.jake.kinsella.Main">
-            <classpath file="*.jar" />
+            <classpath file="build/jar/*.jar" />
         </bundleapp>
     </target>
 
