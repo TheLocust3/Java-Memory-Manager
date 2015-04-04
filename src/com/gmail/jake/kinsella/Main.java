@@ -1,9 +1,11 @@
 package com.gmail.jake.kinsella;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import com.n9mtq4.demo.notifcationmac.Notification;
 
 /**
@@ -90,9 +92,15 @@ public class Main implements ActionListener {
         options2 = constructions.createOption(purgeLowCheck, purgeLowInput, false);
         options3 = constructions.createOption(antiAliasingCheck, antiAliasingCombo, true);
 
+        String os = System.getProperty("os.name").toLowerCase();
         // Create Settings tab
-        Component[] tmp2 = {options1, options2, options3, options4, saveButton};
-        settingsPanel = constructions.createTab(tmp2, 7, 1);
+        if (!(os.indexOf("win") >= 0)) {
+        	Component[] tmp2 = {options1, options2, options3, options4, saveButton};
+        	settingsPanel = constructions.createTab(tmp2, 7, 1);
+        } else {
+        	Component[] tmp2 = {options1, options3, options4, saveButton};
+        	settingsPanel = constructions.createTab(tmp2, 6, 1);
+        }
 
         // Setup tabbedPane
         tabbedPane = new JTabbedPane();
