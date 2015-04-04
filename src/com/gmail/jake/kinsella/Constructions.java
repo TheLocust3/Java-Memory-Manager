@@ -25,7 +25,7 @@ public class Constructions {
     }
 
     // Creates a one line option for the settings tab with a combo box
-    public JPanel createOption (JCheckBox checkBox, JComboBox comboBox ,boolean windowsComp) {
+    public JPanel createOption (JCheckBox checkBox, JComboBox comboBox, boolean windowsComp) {
         JPanel tmp = new JPanel();
 
         if (!windowsComp && !isWindows() || windowsComp) {

@@ -7,7 +7,7 @@ import java.text.NumberFormat;
  * Created by jakekinsella on 10/1/14.
  */
 public class MemoryGraphic {
-	private int GRAPHICS_WIDTH = 244;
+	private int GRAPHICS_WIDTH = 252;
 	
     public MemoryStats memoryStats = new MemoryStats();
 

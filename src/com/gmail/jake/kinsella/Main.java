@@ -12,14 +12,14 @@ import com.n9mtq4.demo.notifcationmac.Notification;
 public class Main implements ActionListener {
     JTabbedPane tabbedPane;
     JCheckBox alertLowCheck, purgeLowCheck, antiAliasingCheck, antiAliasingChoiceCheck;
-    JTextField alertLowInput, purgeLowInput;
+    JTextField alertLowInput, purgeLowInput, timeInput;
     JComboBox antiAliasingCombo;
 
     Canvas canvas;
     Notification n;
 
     boolean sentNotifaction = false, purgedOnLow = false;
-    int ramOnAlert = 512, ramOnPurge = 256;
+    int ramOnAlert = 512, ramOnPurge = 256, timeout = 3000;
 
     Main () {
         // Set nice looking Nimbus theme
@@ -36,7 +36,7 @@ public class Main implements ActionListener {
     	
         JButton purgeButton, saveButton;
         JFrame jfrm;
-        JPanel settingsPanel, memoryPanel, quickButtonsPanel, options1, options2, options3;
+        JPanel settingsPanel, memoryPanel, quickButtonsPanel, options1, options2, options3, options4 = new JPanel();
 
         Constructions constructions = new Constructions();
 
@@ -74,6 +74,12 @@ public class Main implements ActionListener {
         String[] tmpOptions = {"Bicubic", "Bilinear", "Nearest Neighbor"};
         antiAliasingCombo = constructions.createOptionsComboBox(this, "AntiAliasingCombo", tmpOptions, 2, true);
 
+        // Create line four of options
+        JLabel timeLabel = new JLabel("Update Statistics Every (Seconds): ");
+        timeInput = constructions.createOptionsTextField(this, "TimeInput", "3", 3, true);
+        options4.add(timeLabel);
+        options4.add(timeInput);
+        
         // Create save button
         saveButton = new JButton("Save Options");
         saveButton.setActionCommand("SaveButton");
@@ -85,8 +91,8 @@ public class Main implements ActionListener {
         options3 = constructions.createOption(antiAliasingCheck, antiAliasingCombo, true);
 
         // Create Settings tab
-        Component[] tmp2 = {options3, options1, options2, saveButton};
-        settingsPanel = constructions.createTab(tmp2, 6, 1);
+        Component[] tmp2 = {options1, options2, options3, options4, saveButton};
+        settingsPanel = constructions.createTab(tmp2, 7, 1);
 
         // Setup tabbedPane
         tabbedPane = new JTabbedPane();
@@ -107,7 +113,7 @@ public class Main implements ActionListener {
             @Override
             protected Void doInBackground() throws Exception {
                 while (true) {
-                    Thread.sleep(3000);
+                    Thread.sleep(timeout);
                     if (tabbedPane.getSelectedIndex() == 0) {
                         canvas.updateStats();
                         canvas.repaint(0, 0, canvas.getWidth(), (int) (canvas.getHeight() / 2.25)); //  Repaint memory graphic
@@ -156,22 +162,16 @@ public class Main implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getActionCommand().equals("AlertLowInput")) {
-            ramOnAlert = parse(alertLowInput.getText(), 512);
-        } else if (actionEvent.getActionCommand().equals("AlertLowCheck")) {
+        if (actionEvent.getActionCommand().equals("AlertLowCheck")) {
             if (alertLowCheck.isSelected()) {
                 alertLowInput.setEnabled(true);
-                ramOnAlert = parse(alertLowInput.getText(), 512);
             } else {
                 alertLowInput.setEnabled(false);
             }
-        } else if (actionEvent.getActionCommand().equals("PurgeLowInput")) {
-            ramOnPurge = parse(purgeLowInput.getText(), 256);
         } else if (actionEvent.getActionCommand().equals("PurgeLowCheck")) {
             if (purgeLowCheck.isSelected()) {
                 PasswordDialog passwordDialog = new PasswordDialog(false);
                 purgeLowInput.setEnabled(true);
-                ramOnPurge = parse(purgeLowInput.getText(), 256);
             } else {
                 purgeLowInput.setEnabled(false);
             }
@@ -194,6 +194,7 @@ public class Main implements ActionListener {
         } else if (actionEvent.getActionCommand().equals("SaveButton")) {
             ramOnPurge = parse(purgeLowInput.getText(), 256);
             ramOnAlert = parse(alertLowInput.getText(), 512);
+            timeout = parse(timeInput.getText(), 3) * 1000;
         }
     }
 
