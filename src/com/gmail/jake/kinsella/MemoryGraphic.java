@@ -9,6 +9,10 @@ import java.text.NumberFormat;
 public class MemoryGraphic {
 	private int GRAPHICS_WIDTH = 252;
 	
+	private final Color GREEN = new Color(140, 230, 49);
+	private final Color YELLOW = new Color(245, 235, 8);
+	private final Color RED = new Color(230, 0, 0);
+	
     public MemoryStats memoryStats = new MemoryStats();
 
     public boolean antiAliasing = true;
@@ -32,22 +36,22 @@ public class MemoryGraphic {
         // Windows does not have wired memory
         if (!memoryStats.isWindows()) {
             // Draw wired memory graphic
-            drawRect(g, 3, 2, GRAPHICS_WIDTH, 50, Color.RED, true);
+            drawRect(g, 3, 2, GRAPHICS_WIDTH, 50, RED, true);
         }
 
         int unusedRamX = getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
 
         if (!memoryStats.isWindows()) {
             // Draw used memory graphic
-            drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, Color.YELLOW, false);
+            drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, YELLOW, false);
         } else {
             // Instead of wired memory on the bottom there is used memory
-            g.setColor(Color.YELLOW);
+            g.setColor(YELLOW);
             g.fillRoundRect(3, 2, GRAPHICS_WIDTH, 50, 10, 10);
         }
 
         // Draw unused memory graphic
-        drawRect(g, 3, 2, unusedRamX, 50, Color.GREEN, false);
+        drawRect(g, 3, 2, unusedRamX, 50, GREEN, false);
 
         // Draw black outline of graphic
         g.setColor(Color.BLACK);
@@ -59,7 +63,7 @@ public class MemoryGraphic {
         g.drawString("You have " + memoryStats.maxMem / 1000 + " GB of RAM", 60, 70);
         
         // Draw unused memory circle
-        g.setColor(Color.GREEN);
+        g.setColor(GREEN);
         g.fillRoundRect(2, 81, 10, 10, 10, 10);
         g.setColor(Color.BLACK);
         String output = formatter.format((float) (memoryStats.getUnusedMemory() / 1000.0));
@@ -68,7 +72,7 @@ public class MemoryGraphic {
         g.drawRoundRect(2, 81, 10, 10, 10, 10);
         
         // Draw used memory circle
-        g.setColor(Color.YELLOW);
+        g.setColor(YELLOW);
         g.fillRoundRect(2, 101, 10, 10, 10, 10);
         g.setColor(Color.BLACK);
         output = formatter.format((float) (memoryStats.getUsedMemory() / 1000.0));
@@ -78,7 +82,7 @@ public class MemoryGraphic {
         
         if (!memoryStats.isWindows()) { //  There is no wired memory on Windows
 	        // Draw wired memory circle
-	        g.setColor(Color.RED);
+	        g.setColor(RED);
 	        g.fillRoundRect(2, 121, 10, 10, 10, 10);
 	        
 	        g.setColor(Color.BLACK);
