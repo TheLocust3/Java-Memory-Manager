@@ -7,10 +7,11 @@ import java.text.NumberFormat;
  * Created by jakekinsella on 10/1/14.
  */
 public class MemoryGraphic {
+	private int GRAPHICS_WIDTH = 244;
+	
     public MemoryStats memoryStats = new MemoryStats();
 
     public boolean antiAliasing = true;
-
     public Object antiAliasingType = RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR;
 
     public void drawGraphic (Graphics graphics) {
@@ -31,18 +32,18 @@ public class MemoryGraphic {
         // Windows does not have wired memory
         if (!memoryStats.isWindows()) {
             // Draw wired memory graphic
-            drawRect(g, 3, 2, 246, 50, Color.RED, true);
+            drawRect(g, 3, 2, GRAPHICS_WIDTH, 50, Color.RED, true);
         }
 
-        int unusedRamX = getSize(246, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
+        int unusedRamX = getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
 
         if (!memoryStats.isWindows()) {
             // Draw used memory graphic
-            drawRect(g, 3, 2, getSize(246, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, Color.YELLOW, false);
+            drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, Color.YELLOW, false);
         } else {
             // Instead of wired memory on the bottom there is used memory
             g.setColor(Color.YELLOW);
-            g.fillRoundRect(3, 2, 246, 50, 10, 10);
+            g.fillRoundRect(3, 2, GRAPHICS_WIDTH, 50, 10, 10);
         }
 
         // Draw unused memory graphic
@@ -51,7 +52,7 @@ public class MemoryGraphic {
         // Draw black outline of graphic
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(1.5f));
-        g.drawRoundRect(2, 2, 246, 50, 10, 10);
+        g.drawRoundRect(2, 2, GRAPHICS_WIDTH, 50, 10, 10);
 
         g.setStroke(new BasicStroke(1));
         
