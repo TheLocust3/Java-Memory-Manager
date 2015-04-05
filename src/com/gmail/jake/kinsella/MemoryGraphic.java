@@ -51,6 +51,7 @@ public class MemoryGraphic {
             drawRect(g, 3, 2, inactiveRamX, 50, BLUE, false);
         } else {
             // Instead of wired memory on the bottom there is used memory
+        	g.setColor(YELLOW);
             g.fillRoundRect(3, 2, GRAPHICS_WIDTH, 50, 10, 10);
         }
         
