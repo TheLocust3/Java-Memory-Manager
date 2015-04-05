@@ -30,7 +30,7 @@ public class MemoryStats {
             usedMem = maxMem - unusedMem;
 
             System.out.println(memory);
-        } else {
+        } else if (isMac()) {
             // Run Mac specific commands
             memory = cmd.run("top -l 1", "PhysMem");
 
@@ -42,12 +42,24 @@ public class MemoryStats {
             maxMem = (int) (Long.parseLong(memory.substring(12, memory.length())) / 1048576);
             
             unusedMem = maxMem - usedMem;
+        } else if (isLinux()) {
+        	// Run linux specific commands
+        	System.out.println("NOT SUPPORTED");
         }
     }
 
     // Check if operating system is Windows
     public boolean isWindows () {
         return (os.indexOf("win") >= 0);
+    }
+    
+    public boolean isMac () {
+    	return (os.indexOf("mac") >= 0);
+    }
+    
+    // Check if opertating system is Linux
+    public boolean isLinux () {
+    	return (!isMac() && (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0));
     }
 
     public int getUsedMemory () {
