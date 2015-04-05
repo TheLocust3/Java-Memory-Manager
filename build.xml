@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ButtonDemo" default="default" basedir=".">        
+<project name="MemoryManager" default="default" basedir=".">        
 
     <taskdef name="bundleapp"
              classname="com.oracle.appbundler.AppBundlerTask"   
@@ -40,4 +40,16 @@
         </bundleapp>
     </target>
 
+    <target name="zip-jar">
+        <zip destfile="build/release/Memory-Manager-Universal.zip" basedir="build/jar/" />
+    </target>
+
+    <target name="zip-app">
+        <zip destfile="build/release/Memory-Manager-Mac.zip" basedir="build/app/" />
+    </target>
+
+    <target name="build-release" depends="build-app">
+        <antcall target="zip-jar" />
+        <antcall target="zip-app" />
+    </target>
 </project>
