@@ -1,6 +1,6 @@
 Java-Memory-Manager
 ===================
-A simple Java Memory Manager for OS X and Windows
+A Memory Management program written in Java for OS X and Windows  
 
 Copyright (C) 2014  Jake Kinsella
 
@@ -17,7 +17,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-I did not create appbundler-1.0.jar. You can find it [here](https://java.net/projects/appbundler/)  
+I did not create appbundler-1.0.jar. You can find it [here](https://java.net/projects/appbundler/).  
   
   
 Operating Systems that are compatible with this script:  
