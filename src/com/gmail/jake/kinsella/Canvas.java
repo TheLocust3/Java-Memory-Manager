@@ -26,7 +26,7 @@ public class Canvas extends JPanel {
     }
 
     public Dimension getPreferredSize () {
-        return new Dimension(250, 135);
+        return new Dimension(255, 155);
     }
     
     public void paintComponent (Graphics g) {

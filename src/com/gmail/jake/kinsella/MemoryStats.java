@@ -6,7 +6,7 @@ package com.gmail.jake.kinsella;
 public class MemoryStats {
     RunCommand cmd;
     String memory = "";
-    int usedMem, unusedMem, wiredMem, maxMem;
+    int usedMem, unusedMem, inactiveMem, wiredMem, maxMem;
     String os = System.getProperty("os.name").toLowerCase();
 
     public MemoryStats () {
@@ -32,16 +32,30 @@ public class MemoryStats {
             System.out.println(memory);
         } else if (isMac()) {
             // Run Mac specific commands
-            memory = cmd.run("top -l 1", "PhysMem");
+            /*memory = cmd.run("top -l 1", "PhysMem");
 
             usedMem = Integer.parseInt(memory.substring(memory.indexOf(" ") + 1, memory.indexOf("M used")));
 
             wiredMem = Integer.parseInt(memory.substring(memory.indexOf("(") + 1, memory.indexOf("M wired)")));
 
             memory = cmd.run("sysctl hw.memsize", " ");
+            maxMem = (int) (Long.parseLong(memory.substring(12, memory.length())) / 1048576);*/
+        	
+        	memory = cmd.run("vm_stat", "Pages active");
+        	usedMem = (int) ((Long.parseLong(memory.substring(memory.lastIndexOf(" ") + 1, memory.indexOf("."))) * 4096) / 1048676);
+        	
+        	memory = cmd.run("vm_stat", "Pages wired down");
+        	wiredMem = (int) ((Long.parseLong(memory.substring(memory.lastIndexOf(" ") + 1, memory.indexOf("."))) * 4096) / 1048676);
+        	
+        	memory = cmd.run("vm_stat", "Pages inactive");
+        	inactiveMem = (int) ((Long.parseLong(memory.substring(memory.lastIndexOf(" ") + 1, memory.indexOf("."))) * 4096) / 1048676);
+
+        	
+        	memory = cmd.run("sysctl hw.memsize", " ");
+        	
             maxMem = (int) (Long.parseLong(memory.substring(12, memory.length())) / 1048576);
-            
-            unusedMem = maxMem - usedMem;
+        	
+            unusedMem = maxMem - usedMem - inactiveMem - wiredMem;
         } else if (isLinux()) {
         	// Run linux specific commands
         	memory = cmd.run("top -bn1", "KiB Mem");
@@ -50,7 +64,7 @@ public class MemoryStats {
         	
         	maxMem = Integer.parseInt(memory.substring(11, 18)) / 1024;
         	        	
-        	unusedMem = Integer.parseInt(memory.substring(43, 49)) / 1024;
+        	unusedMem = maxMem - usedMem;
         }
     }
 
@@ -69,9 +83,13 @@ public class MemoryStats {
     }
 
     public int getUsedMemory () {
-        return usedMem - wiredMem;
+        return usedMem;
     }
 
+    public int getInactiveMemory () {
+    	return inactiveMem;
+    }
+    
     public int getUnusedMemory () {
         return unusedMem;
     }

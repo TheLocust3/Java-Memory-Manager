@@ -9,9 +9,10 @@ import java.text.NumberFormat;
 public class MemoryGraphic {
 	private int GRAPHICS_WIDTH = 252;
 	
-	private final Color GREEN = new Color(140, 230, 49);
-	private final Color YELLOW = new Color(245, 235, 8);
-	private final Color RED = new Color(230, 0, 0);
+	private final Color GREEN = new Color(38, 194, 129);
+	private final Color BLUE = new Color(25, 181, 254);
+	private final Color YELLOW = new Color(244, 208, 63);
+	private final Color RED = new Color(242, 38, 19);
 	
     public MemoryStats memoryStats = new MemoryStats();
 
@@ -40,16 +41,19 @@ public class MemoryGraphic {
         }
 
         int unusedRamX = getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
+        int inactiveRamX = getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getInactiveMemory()) + unusedRamX;
 
         if (!memoryStats.isWindows() && !memoryStats.isLinux()) {
             // Draw used memory graphic
-            drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, YELLOW, false);
+            drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + inactiveRamX, 50, YELLOW, false);
+            
+        	// Draw inactive memory graphic
+            drawRect(g, 3, 2, inactiveRamX, 50, BLUE, false);
         } else {
             // Instead of wired memory on the bottom there is used memory
-            g.setColor(YELLOW);
             g.fillRoundRect(3, 2, GRAPHICS_WIDTH, 50, 10, 10);
         }
-
+        
         // Draw unused memory graphic
         drawRect(g, 3, 2, unusedRamX, 50, GREEN, false);
 
@@ -72,26 +76,37 @@ public class MemoryGraphic {
         // Draw unused memory outline
         g.drawRoundRect(2, 81, 10, 10, 10, 10);
         
+        if (!memoryStats.isWindows() && !memoryStats.isLinux()) {
+	        // Draw inactive memory circle
+	        g.setColor(BLUE);
+	        g.fillRoundRect(2, 101, 10, 10, 10, 10);
+	        g.setColor(Color.BLACK);
+	        output = formatter.format((float) (memoryStats.getInactiveMemory() / 1024.0));
+	        g.drawString("Inactive Memory: " + output + " GB", 60, 110);
+	        // Draw inactive memory outline
+	        g.drawRoundRect(2, 101, 10, 10, 10, 10);
+        }
+        
         // Draw used memory circle
         g.setColor(YELLOW);
-        g.fillRoundRect(2, 101, 10, 10, 10, 10);
+        g.fillRoundRect(2, 121, 10, 10, 10, 10);
         g.setColor(Color.BLACK);
         output = formatter.format((float) (memoryStats.getUsedMemory() / 1024.0));
-        g.drawString("Used Memory: " + output + " GB", 60, 110);
+        g.drawString("Used Memory: " + output + " GB", 60, 130);
         // Draw used memory outline
-        g.drawRoundRect(2, 101, 10, 10, 10, 10);
+        g.drawRoundRect(2, 121, 10, 10, 10, 10);
         
         if (!memoryStats.isWindows() && !memoryStats.isLinux()) { //  There is no wired memory on Windows
 	        // Draw wired memory circle
 	        g.setColor(RED);
-	        g.fillRoundRect(2, 121, 10, 10, 10, 10);
+	        g.fillRoundRect(2, 141, 10, 10, 10, 10);
 	        
 	        g.setColor(Color.BLACK);
 	        output = formatter.format((float) (memoryStats.getWiredMemory() / 1024.0));
-	        g.drawString("Wired Memory: " + output + " GB", 60, 130);
+	        g.drawString("Wired Memory: " + output + " GB", 60, 150);
 	        
 	        // Draw wired memory outline
-	        g.drawRoundRect(2, 121, 10, 10, 10, 10);
+	        g.drawRoundRect(2, 141, 10, 10, 10, 10);
         }
     }
 

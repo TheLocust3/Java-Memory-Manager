@@ -80,7 +80,6 @@ public class Main implements ActionListener {
         JLabel timeLabel = new JLabel("Update Statistics Every (Seconds): ");
         timeInput = constructions.createOptionsTextField(this, "TimeInput", "3", 3, true);
         options4.add(timeLabel);
-        options4.add(timeInput);
         
         // Create save button
         saveButton = new JButton("Save Options");
