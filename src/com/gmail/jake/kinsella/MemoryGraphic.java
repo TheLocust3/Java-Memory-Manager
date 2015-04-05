@@ -60,13 +60,14 @@ public class MemoryGraphic {
 
         g.setStroke(new BasicStroke(1));
         
-        g.drawString("You have " + memoryStats.maxMem / 1000 + " GB of RAM", 60, 70);
+        String output = formatter.format(memoryStats.maxMem / 1024.0);
+        g.drawString("You have " + output + " GB of RAM", 60, 70);
         
         // Draw unused memory circle
         g.setColor(GREEN);
         g.fillRoundRect(2, 81, 10, 10, 10, 10);
         g.setColor(Color.BLACK);
-        String output = formatter.format((float) (memoryStats.getUnusedMemory() / 1024.0));
+        output = formatter.format((float) (memoryStats.getUnusedMemory() / 1024.0));
         g.drawString("Unused Memory: " + output + " GB", 60, 90);
         // Draw unused memory outline
         g.drawRoundRect(2, 81, 10, 10, 10, 10);
