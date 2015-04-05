@@ -1,6 +1,6 @@
 Java-Memory-Manager
 ===================
-A Memory Management program written in Java for OS X and Windows  
+A Memory Management program written in Java for OS X, Linux, and Windows  
 
 Copyright (C) 2014  Jake Kinsella
 
@@ -22,18 +22,18 @@ I did not create appbundler-1.0.jar. You can find it [here](https://java.net/pro
   
 Operating Systems that are compatible with this script:  
 	- Mac OS X  
-	- Windows (Some features are disabled)
+	- Windows (Some features are disabled)  
+	- Linux (Some features are disabled)  
 
 Future Updates (Updates are listed in order of importance):  
 	- Updated graphic  
 	- Make faster on Windows  
 	- More support for Windows  
-	- Support for Linux  
 	- Process list  
 	- Code cleanup  
 
 Things to keep in mind:  
-	- Windows has very limited support right now  
+	- Windows and Linux has very limited support right now  
 
 BUGS:  
 	- None!  
