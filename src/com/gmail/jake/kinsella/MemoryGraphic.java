@@ -7,7 +7,7 @@ import java.text.NumberFormat;
  * Created by jakekinsella on 10/1/14.
  */
 public class MemoryGraphic {
-	private int GRAPHICS_WIDTH = 252;
+	private int GRAPHICS_WIDTH = 250;
 	
 	private final Color GREEN = new Color(38, 194, 129);
 	private final Color BLUE = new Color(25, 181, 254);
