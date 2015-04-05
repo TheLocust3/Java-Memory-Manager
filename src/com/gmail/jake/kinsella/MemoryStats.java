@@ -44,7 +44,17 @@ public class MemoryStats {
             unusedMem = maxMem - usedMem;
         } else if (isLinux()) {
         	// Run linux specific commands
-        	System.out.println("NOT SUPPORTED");
+        	memory = cmd.run("top -bn1", "KiB Mem");
+        	
+        	usedMem = Integer.parseInt(memory.substring(28, 34)) / 1024;
+        	
+        	maxMem = Integer.parseInt(memory.substring(11, 18)) / 1024;
+        	
+        	System.out.println(memory.substring(28, 34) + " " + usedMem);
+        	System.out.println(memory.substring(11, 18) + " " + maxMem);
+        	
+        	unusedMem = Integer.parseInt(memory.substring(43, 49)) / 1024;
+        	System.out.println(memory.substring(43, 49) + " " + unusedMem);
         }
     }
 

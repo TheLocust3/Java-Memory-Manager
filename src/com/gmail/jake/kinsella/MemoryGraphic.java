@@ -34,14 +34,14 @@ public class MemoryGraphic {
         }
 
         // Windows does not have wired memory
-        if (!memoryStats.isWindows()) {
+        if (!memoryStats.isWindows() && !memoryStats.isLinux()) {
             // Draw wired memory graphic
             drawRect(g, 3, 2, GRAPHICS_WIDTH, 50, RED, true);
         }
 
         int unusedRamX = getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUnusedMemory());
 
-        if (!memoryStats.isWindows()) {
+        if (!memoryStats.isWindows() && !memoryStats.isLinux()) {
             // Draw used memory graphic
             drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + unusedRamX, 50, YELLOW, false);
         } else {
@@ -66,7 +66,7 @@ public class MemoryGraphic {
         g.setColor(GREEN);
         g.fillRoundRect(2, 81, 10, 10, 10, 10);
         g.setColor(Color.BLACK);
-        String output = formatter.format((float) (memoryStats.getUnusedMemory() / 1000.0));
+        String output = formatter.format((float) (memoryStats.getUnusedMemory() / 1024.0));
         g.drawString("Unused Memory: " + output + " GB", 60, 90);
         // Draw unused memory outline
         g.drawRoundRect(2, 81, 10, 10, 10, 10);
@@ -75,18 +75,18 @@ public class MemoryGraphic {
         g.setColor(YELLOW);
         g.fillRoundRect(2, 101, 10, 10, 10, 10);
         g.setColor(Color.BLACK);
-        output = formatter.format((float) (memoryStats.getUsedMemory() / 1000.0));
+        output = formatter.format((float) (memoryStats.getUsedMemory() / 1024.0));
         g.drawString("Used Memory: " + output + " GB", 60, 110);
         // Draw used memory outline
         g.drawRoundRect(2, 101, 10, 10, 10, 10);
         
-        if (!memoryStats.isWindows()) { //  There is no wired memory on Windows
+        if (!memoryStats.isWindows() && !memoryStats.isLinux()) { //  There is no wired memory on Windows
 	        // Draw wired memory circle
 	        g.setColor(RED);
 	        g.fillRoundRect(2, 121, 10, 10, 10, 10);
 	        
 	        g.setColor(Color.BLACK);
-	        output = formatter.format((float) (memoryStats.getWiredMemory() / 1000.0));
+	        output = formatter.format((float) (memoryStats.getWiredMemory() / 1024.0));
 	        g.drawString("Wired Memory: " + output + " GB", 60, 130);
 	        
 	        // Draw wired memory outline
