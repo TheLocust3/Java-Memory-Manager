@@ -39,7 +39,7 @@ public class MemoryStats {
             wiredMem = Integer.parseInt(memory.substring(memory.indexOf("(") + 1, memory.indexOf("M wired)")));
 
             memory = cmd.run("sysctl hw.memsize", " ");
-            maxMem = (int) ((Long.parseLong(memory.substring(12, memory.length())) / 1073741824) * 1000);
+            maxMem = (int) (Long.parseLong(memory.substring(12, memory.length())) / 1048576);
             
             unusedMem = maxMem - usedMem;
         }
