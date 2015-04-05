@@ -6,7 +6,7 @@
              classpath="lib/appbundler-1.0.jar" />
 
     <target name="clean">
-        <delete dir="build" />
+        <delete dir="build" failonerror="false" />
     </target>
 
     <target name="compile">
@@ -15,7 +15,7 @@
         <javac srcdir="src" destdir="build/classes" />
     </target>
 
-    <target name="build-jar">
+    <target name="build-jar" depends="compile">
         <mkdir dir="build/jar" />
         <jar destfile="build/jar/Memory-Manager-Universal.jar" basedir="build/classes">
             <manifest>
@@ -28,7 +28,7 @@
         <java jar="build/jar/Memory-Manager-Universal.jar" fork="true" />
     </target>
 
-    <target name="build-app">
+    <target name="build-app" depends="build-jar">
  	  <mkdir dir="build/app" />
         
 	   <bundleapp outputdirectory="build/app"
