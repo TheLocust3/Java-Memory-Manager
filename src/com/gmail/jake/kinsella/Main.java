@@ -56,7 +56,11 @@ public class Main implements ActionListener {
         purgeButton.addActionListener(this);
 
         quickButtonsPanel = new JPanel();
-        quickButtonsPanel.add(purgeButton);
+        
+        String os = System.getProperty("os.name").toLowerCase();
+        if (!(os.indexOf("win") >= 0) && !(!(os.indexOf("mac") >= 0) && (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0))) {
+        	quickButtonsPanel.add(purgeButton);
+        }
 
         // Create Memory tab
         Component[] tmp = {canvas, quickButtonsPanel};
@@ -91,9 +95,8 @@ public class Main implements ActionListener {
         options2 = constructions.createOption(purgeLowCheck, purgeLowInput, false);
         options3 = constructions.createOption(antiAliasingCheck, antiAliasingCombo, true);
 
-        String os = System.getProperty("os.name").toLowerCase();
         // Create Settings tab
-        if (!(os.indexOf("win") >= 0)) {
+        if (!(os.indexOf("win") >= 0) && !(!(os.indexOf("mac") >= 0) && (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0))) {
         	Component[] tmp2 = {options1, options2, options3, options4, saveButton};
         	settingsPanel = constructions.createTab(tmp2, 7, 1);
         } else {

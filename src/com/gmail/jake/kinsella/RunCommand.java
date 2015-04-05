@@ -34,6 +34,27 @@ public class RunCommand {
         }
     }
 
+    // Runs a command
+    public String run (String cmd, int line) {
+        String s;
+        String full = "";
+
+        try {
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            for (int i = 1; i < line; i++) {
+            	stdInput.readLine();
+            }
+            
+            return stdInput.readLine();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
     // Runs a command and takes an argument to search the results
     public String run (String cmd, String grep) {
         String s;

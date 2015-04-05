@@ -46,13 +46,15 @@ public class MemoryGraphic {
         if (!memoryStats.isWindows() && !memoryStats.isLinux()) {
             // Draw used memory graphic
             drawRect(g, 3, 2, getSize(GRAPHICS_WIDTH, memoryStats.getMaxMemory(), memoryStats.getUsedMemory()) + inactiveRamX, 50, YELLOW, false);
-            
-        	// Draw inactive memory graphic
-            drawRect(g, 3, 2, inactiveRamX, 50, BLUE, false);
         } else {
             // Instead of wired memory on the bottom there is used memory
         	g.setColor(YELLOW);
             g.fillRoundRect(3, 2, GRAPHICS_WIDTH, 50, 10, 10);
+        }
+        
+        if (!memoryStats.isWindows()) {
+        	// Draw inactive memory graphic
+            drawRect(g, 3, 2, inactiveRamX, 50, BLUE, false);
         }
         
         // Draw unused memory graphic
@@ -77,7 +79,7 @@ public class MemoryGraphic {
         // Draw unused memory outline
         g.drawRoundRect(2, 81, 10, 10, 10, 10);
         
-        if (!memoryStats.isWindows() && !memoryStats.isLinux()) {
+        if (!memoryStats.isWindows()) {
 	        // Draw inactive memory circle
 	        g.setColor(BLUE);
 	        g.fillRoundRect(2, 101, 10, 10, 10, 10);

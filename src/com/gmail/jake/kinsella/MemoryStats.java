@@ -32,14 +32,6 @@ public class MemoryStats {
             System.out.println(memory);
         } else if (isMac()) {
             // Run Mac specific commands
-            /*memory = cmd.run("top -l 1", "PhysMem");
-
-            usedMem = Integer.parseInt(memory.substring(memory.indexOf(" ") + 1, memory.indexOf("M used")));
-
-            wiredMem = Integer.parseInt(memory.substring(memory.indexOf("(") + 1, memory.indexOf("M wired)")));
-
-            memory = cmd.run("sysctl hw.memsize", " ");
-            maxMem = (int) (Long.parseLong(memory.substring(12, memory.length())) / 1048576);*/
         	
         	memory = cmd.run("vm_stat", "Pages active");
         	usedMem = (int) ((Long.parseLong(memory.substring(memory.lastIndexOf(" ") + 1, memory.indexOf("."))) * 4096) / 1048676);
@@ -52,19 +44,20 @@ public class MemoryStats {
 
         	
         	memory = cmd.run("sysctl hw.memsize", " ");
-        	
             maxMem = (int) (Long.parseLong(memory.substring(12, memory.length())) / 1048576);
         	
             unusedMem = maxMem - usedMem - inactiveMem - wiredMem;
         } else if (isLinux()) {
         	// Run linux specific commands
+        	memory = cmd.run("vmstat -a", 3);
+        	usedMem = Integer.parseInt(memory.substring(nthOccurrence(memory, ' ', 7) + 1, nthOccurrence(memory, ' ', 8))) / 1024;
+        	
+        	inactiveMem = Integer.parseInt(memory.substring(nthOccurrence(memory, ' ', 6) + 1, nthOccurrence(memory, ' ', 7))) / 1024;
+        	
+        	unusedMem = Integer.parseInt(memory.substring(nthOccurrence(memory, ' ', 5) + 1, nthOccurrence(memory, ' ', 6))) / 1024;
+        	
         	memory = cmd.run("top -bn1", "KiB Mem");
-        	
-        	usedMem = Integer.parseInt(memory.substring(28, 34)) / 1024;
-        	
-        	maxMem = Integer.parseInt(memory.substring(11, 18)) / 1024;
-        	        	
-        	unusedMem = maxMem - usedMem;
+        	maxMem = Integer.parseInt(memory.substring(nthOccurrence(memory, ' ', 3) + 1, nthOccurrence(memory, ' ', 4))) / 1024;
         }
     }
 
@@ -100,5 +93,12 @@ public class MemoryStats {
 
     public int getMaxMemory () {
         return maxMem;
+    }
+    
+    private int nthOccurrence (String str, char c, int n) {
+        int pos = str.indexOf(c, 0);
+        while (n-- > 0 && pos != -1)
+            pos = str.indexOf(c, pos+1);
+        return pos;
     }
 }
