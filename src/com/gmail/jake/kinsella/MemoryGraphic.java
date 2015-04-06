@@ -9,9 +9,9 @@ import java.text.NumberFormat;
 public class MemoryGraphic {
 	private int GRAPHICS_WIDTH = 250;
 	
-	private final Color GREEN = new Color(38, 194, 129);
-	private final Color BLUE = new Color(25, 181, 254);
-	private final Color YELLOW = new Color(244, 208, 63);
+	private final Color GREEN = new Color(0, 190, 106);
+	private final Color BLUE = new Color(20, 162, 212);
+	private final Color YELLOW = new Color(255, 232, 15);
 	private final Color RED = new Color(242, 38, 19);
 	
     public MemoryStats memoryStats = new MemoryStats();
