@@ -72,44 +72,42 @@ public class MemoryGraphic {
         
         // Draw unused memory circle
         g.setColor(GREEN);
-        g.fillRoundRect(2, 81, 10, 10, 10, 10);
+        g.fillRoundRect(2, 80, 13, 13, 13, 13);
         g.setColor(Color.BLACK);
         output = formatter.format((float) (memoryStats.getUnusedMemory() / 1024.0));
         g.drawString("Unused Memory: " + output + " GB", 60, 90);
         // Draw unused memory outline
-        g.drawRoundRect(2, 81, 10, 10, 10, 10);
+        g.drawRoundRect(2, 80, 13, 13, 13, 13);
         
         if (!memoryStats.isWindows()) {
 	        // Draw inactive memory circle
 	        g.setColor(BLUE);
-	        g.fillRoundRect(2, 101, 10, 10, 10, 10);
+	        g.fillRoundRect(2, 100, 13, 13, 13, 13);
 	        g.setColor(Color.BLACK);
 	        output = formatter.format((float) (memoryStats.getInactiveMemory() / 1024.0));
 	        g.drawString("Inactive Memory: " + output + " GB", 60, 110);
 	        // Draw inactive memory outline
-	        g.drawRoundRect(2, 101, 10, 10, 10, 10);
+	        g.drawRoundRect(2, 100, 13, 13, 13, 13);
         }
         
         // Draw used memory circle
         g.setColor(YELLOW);
-        g.fillRoundRect(2, 121, 10, 10, 10, 10);
+        g.fillRoundRect(2, 120, 13, 13, 13, 13);
         g.setColor(Color.BLACK);
         output = formatter.format((float) (memoryStats.getUsedMemory() / 1024.0));
         g.drawString("Used Memory: " + output + " GB", 60, 130);
         // Draw used memory outline
-        g.drawRoundRect(2, 121, 10, 10, 10, 10);
+        g.drawRoundRect(2, 120, 13, 13, 13, 13);
         
         if (!memoryStats.isWindows() && !memoryStats.isLinux()) { //  There is no wired memory on Windows
 	        // Draw wired memory circle
 	        g.setColor(RED);
-	        g.fillRoundRect(2, 141, 10, 10, 10, 10);
-	        
+	        g.fillRoundRect(2, 140, 13, 13, 13, 13);      
 	        g.setColor(Color.BLACK);
 	        output = formatter.format((float) (memoryStats.getWiredMemory() / 1024.0));
-	        g.drawString("Wired Memory: " + output + " GB", 60, 150);
-	        
+	        g.drawString("Wired Memory: " + output + " GB", 60, 150);	        
 	        // Draw wired memory outline
-	        g.drawRoundRect(2, 141, 10, 10, 10, 10);
+	        g.drawRoundRect(2, 140, 13, 13, 13, 13);
         }
     }
 
