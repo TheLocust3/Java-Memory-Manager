@@ -84,6 +84,7 @@ public class Main implements ActionListener {
         JLabel timeLabel = new JLabel("Update Statistics Every (Seconds): ");
         timeInput = constructions.createOptionsTextField(this, "TimeInput", "3", 3, true);
         options4.add(timeLabel);
+        options4.add(timeInput);
         
         // Create save button
         saveButton = new JButton("Save Options");
@@ -98,7 +99,7 @@ public class Main implements ActionListener {
         // Create Settings tab
         if (!(os.indexOf("win") >= 0) && !(!(os.indexOf("mac") >= 0) && (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0))) {
         	Component[] tmp2 = {options1, options2, options3, options4, saveButton};
-        	settingsPanel = constructions.createTab(tmp2, 7, 1);
+        	settingsPanel = constructions.createTab(tmp2, 8, 1);
         } else {
         	Component[] tmp2 = {options1, options3, options4, saveButton};
         	settingsPanel = constructions.createTab(tmp2, 6, 1);
