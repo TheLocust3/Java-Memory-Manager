@@ -1,3 +1,7 @@
+plugins {
+	id "edu.sc.seis.macAppBundle" version "2.1.0"
+}
+
 apply plugin: 'java'
 
 task wrapper(type: Wrapper) {
@@ -17,6 +21,19 @@ sourceSets {
     }
 }
 
-task release (dependsOn: ['jar'], type: Zip) {
+macAppBundle {
+    mainClassName = "com.gmail.jake.kinsella.Main"
+    bundleJRE = true
+}
+
+task releaseJar (dependsOn: ['jar'], type: Zip) {
+	archiveName = "Memory-Manager-Universal.zip"
 	from jar.outputs.files
 }
+
+task releaseApp (dependsOn: ['createApp'], type: Zip) {
+	archiveName = "Memory-Manager-Mac.zip"
+	from('build/macApp')
+}
+
+task release (dependsOn: ['releaseJar', 'releaseApp']) {}
