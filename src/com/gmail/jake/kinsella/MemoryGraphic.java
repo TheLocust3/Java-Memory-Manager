@@ -65,7 +65,7 @@ public class MemoryGraphic {
         g.setStroke(new BasicStroke(1.5f));
         g.drawRoundRect(2, 2, GRAPHICS_WIDTH, 50, 10, 10);
 
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(1.25f));
         
         String output = formatter.format(memoryStats.maxMem / 1024.0);
         g.drawString("You have " + output + " GB of RAM", 60, 70);
