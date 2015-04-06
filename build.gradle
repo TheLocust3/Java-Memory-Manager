@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+jar {
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	manifest { attributes 'Main-Class': 'com.gmail.jake.kinsella.Main' }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src', 'MacOSX-Notification-Library-Java/src']
+        }
+    }
+}
+
+task release (dependsOn: ['jar'], type: Zip) {
+	from jar.outputs.files
+}
