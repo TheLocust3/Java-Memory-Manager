@@ -23,7 +23,7 @@ sourceSets {
 
 macAppBundle {
     mainClassName = "com.gmail.jake.kinsella.Main"
-    bundleJRE = true
+    bundleJRE = false
 }
 
 task releaseJar (dependsOn: ['jar'], type: Zip) {
