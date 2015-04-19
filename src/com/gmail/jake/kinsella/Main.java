@@ -68,7 +68,7 @@ public class Main implements ActionListener {
         tmp = null; // Make sure it gets de-allocated quick
 
         // Create line one of options
-        alertLowCheck = constructions.createOptionsCheckBox(this, "AlertLowCheck", "Alert when unused ram is <", true);
+        alertLowCheck = constructions.createOptionsCheckBox(this, "AlertLowCheck", "Alert when usable ram is <", true);
         alertLowInput = constructions.createOptionsTextField(this, "AlertLowInput", "512", 3, true);
 
         // Create line two of options
