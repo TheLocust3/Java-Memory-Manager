@@ -133,9 +133,9 @@ public class Main implements ActionListener {
 
                     //  Notifaction check and execution
                     if (alertLowCheck.isSelected()) {
-                        if (canvas.memoryGraphic.memoryStats.getUnusedMemory() < ramOnAlert) {
+                        if (canvas.memoryGraphic.memoryStats.getUnusedMemory() + canvas.memoryGraphic.memoryStats.getInactiveMemory() < ramOnAlert) {
                             if (!sentNotifaction) {
-                                n = new Notification("Low Ram Alert", "You have less than " + ramOnAlert + "MB of unused ram left");
+                                n = new Notification("Low Ram Alert", "You have less than " + ramOnAlert + "MB of usable ram left");
                                 n.setSoundName("default");
                                 n.display();
                                 sentNotifaction = true;
